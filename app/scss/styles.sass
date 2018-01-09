@@ -1,0 +1,91 @@
+@import 'variables'
+
+.no-padding
+	padding: 0
+.search
+	background: $bgSearch
+	padding: 40px;
+	text-align: center;
+	input
+		color: $pSearch
+		background: $bgSearch
+		border: 1px solid $btnSearch
+		font-family: $raleWay
+		padding: 10px 20px
+		display: inline-block;
+		margin: -2px
+		transition: all .2s ease-in-out
+	input[type="submit"]
+		background: $btnSearch
+		&:hover
+			background: #46515c
+	input
+		&:first-of-type
+			border-radius: 2px 0 0 2px
+			width: 50%
+		&:last-of-type
+			border-radius: 0 2px 2px 0
+	h3
+		color: $pSearch
+		font-family: $raleWay
+		margin: 0
+		padding: 40px 0
+
+.wrap-infos
+	margin: auto
+	box-sizing: border-box
+	background: $backgroundComments
+
+#infos
+	padding: 50px
+
+.wrap-comment,
+.wrap-user-comment
+	padding: 20px
+	width: 80%
+	margin: auto
+	box-sizing: border-box
+	p, img
+		display: inline-block
+	p
+		color: $pColor
+		font-size: 12px
+		font-family: 'Raleway', sans-serif
+		padding: 15px 30px
+		border-radius: 5px
+		box-shadow: 0 4px 5px rgba(0,0,0,0.05)
+		&:before
+			content: ""
+			position: absolute
+			transform: rotate(45deg)
+			height: 25px
+			width: 25px
+			top: 30px
+	.avatar-github
+		vertical-align: top
+		width: 60px
+		position: absolute
+		box-shadow: 0 4px 5px rgba(0,0,0,0.05)
+		width: 50px
+		border-radius: 50%
+
+.wrap-user-comment
+	text-align: right
+	position: relative
+	img
+		right: -60px
+	p
+		background: $white
+		&:before
+			right: 15px
+			background: $white
+
+.wrap-comment
+	position: relative
+	img
+		left: -60px
+	p
+		background: $blueLight
+		&:before
+			left: 15px
+			background: $blueLight

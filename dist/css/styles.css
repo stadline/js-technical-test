@@ -1,0 +1,104 @@
+/*Font*/
+/*couleur champs de recherche*/
+/*partie user comments*/
+/*partie membre*/
+.no-padding {
+  padding: 0; }
+
+.search {
+  background: #313b44;
+  padding: 40px;
+  text-align: center; }
+  .search input {
+    color: #d7e2ea;
+    background: #313b44;
+    border: 1px solid #404a53;
+    font-family: "Raleway", sans-serif;
+    padding: 10px 20px;
+    display: inline-block;
+    margin: -2px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out; }
+  .search input[type="submit"] {
+    background: #404a53; }
+    .search input[type="submit"]:hover {
+      background: #46515c; }
+  .search input:first-of-type {
+    border-radius: 2px 0 0 2px;
+    width: 50%; }
+  .search input:last-of-type {
+    border-radius: 0 2px 2px 0; }
+  .search h3 {
+    color: #d7e2ea;
+    font-family: "Raleway", sans-serif;
+    margin: 0;
+    padding: 40px 0; }
+
+.wrap-infos {
+  margin: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #eef3f5; }
+
+#infos {
+  padding: 50px; }
+
+.wrap-comment,
+.wrap-user-comment {
+  padding: 20px;
+  width: 80%;
+  margin: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+  .wrap-comment p, .wrap-comment img,
+  .wrap-user-comment p,
+  .wrap-user-comment img {
+    display: inline-block; }
+  .wrap-comment p,
+  .wrap-user-comment p {
+    color: #b1bdc6;
+    font-size: 12px;
+    font-family: 'Raleway', sans-serif;
+    padding: 15px 30px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05); }
+    .wrap-comment p:before,
+    .wrap-user-comment p:before {
+      content: "";
+      position: absolute;
+      -webkit-transform: rotate(45deg);
+              transform: rotate(45deg);
+      height: 25px;
+      width: 25px;
+      top: 30px; }
+  .wrap-comment .avatar-github,
+  .wrap-user-comment .avatar-github {
+    vertical-align: top;
+    width: 60px;
+    position: absolute;
+    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+    width: 50px;
+    border-radius: 50%; }
+
+.wrap-user-comment {
+  text-align: right;
+  position: relative; }
+  .wrap-user-comment img {
+    right: -60px; }
+  .wrap-user-comment p {
+    background: #ffffff; }
+    .wrap-user-comment p:before {
+      right: 15px;
+      background: #ffffff; }
+
+.wrap-comment {
+  position: relative; }
+  .wrap-comment img {
+    left: -60px; }
+  .wrap-comment p {
+    background: #f3fcff; }
+    .wrap-comment p:before {
+      left: 15px;
+      background: #f3fcff; }
