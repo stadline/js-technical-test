@@ -72,15 +72,13 @@
       height: 25px;
       width: 25px;
       top: 30px; }
-  .wrap-comment .avatar-github,
-  .wrap-user-comment .avatar-github {
+  .wrap-comment img,
+  .wrap-user-comment img {
     vertical-align: top;
     width: 60px;
     position: absolute;
     -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
-            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
-    width: 50px;
-    border-radius: 50%; }
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05); }
 
 .wrap-user-comment {
   text-align: right;
@@ -102,3 +100,29 @@
     .wrap-comment p:before {
       left: 15px;
       background: #f3fcff; }
+
+.wrap-users-member {
+  background: #f9fafb;
+  border-right: 2px solid #d2dce4; }
+
+.wrap-member {
+  border-bottom: 1px solid #d2dce4;
+  padding: 20px 30px;
+  position: relative;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out; }
+  .wrap-member:hover {
+    background: #d3deea; }
+  .wrap-member p {
+    font-family: 'Raleway', sans-serif;
+    padding: 0 20px; }
+  .wrap-member img, .wrap-member p {
+    display: inline-block; }
+  .wrap-member img {
+    position: relative;
+    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05); }
+
+.avatar-github {
+  width: 50px;
+  border-radius: 50%; }

@@ -1,10 +1,18 @@
 $ (function (){
+	
 	class User {
 		constructor(avatar, comment, words, admin, userName) {
 			this.avatar = avatar,
 			this.comment = comment,
 			this.words = words,
 			this.admin = admin,
+			this.userName = userName
+		}
+	}
+
+	class Participant {
+		constructor (avatar, userName, words) {
+			this.avatar = avatar,
 			this.userName = userName
 		}
 	}
@@ -104,13 +112,30 @@ $ (function (){
 				participantsAvatar.push(avatar);
 				participantsUserName.push(userName);
 			}
-			console.log(participantsAvatar, participantsUserName);
-
 			// Enleve les doublons du tableau des participant
 			const cleanParticipantAvatar = cleanArray(participantsAvatar);
 			const cleanParticipantUserName = cleanArray(participantsUserName);
 
 			console.log(cleanParticipantAvatar, cleanParticipantUserName);
+		
+			// affiches tout les membres
+			for ( member in cleanParticipantAvatar ) {
+				let 	userId 	= `user${comment}`,
+						avatar 	= cleanParticipantAvatar[member],
+						userName = cleanParticipantUserName[member];
+				// cré l'objet des participants
+				userId  = new Participant(avatar, userName);
+				
+				$('#member')
+					.append('<div class="wrap-member"></div>');
+				$('.wrap-member')
+					.last()
+					.attr('data-user', `${userId.userName}`)
+					.append(`<img class="avatar-github" src=${userId.avatar}/>`)
+					.append(`<p>${userId.userName}</p>`)
+					.append(`<input type="checkbox"/>`);
+			}
+
 		});
 
 

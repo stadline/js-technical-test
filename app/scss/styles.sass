@@ -61,13 +61,11 @@
 			height: 25px
 			width: 25px
 			top: 30px
-	.avatar-github
+	img
 		vertical-align: top
 		width: 60px
 		position: absolute
 		box-shadow: 0 4px 5px rgba(0,0,0,0.05)
-		width: 50px
-		border-radius: 50%
 
 .wrap-user-comment
 	text-align: right
@@ -89,3 +87,27 @@
 		&:before
 			left: 15px
 			background: $blueLight
+
+.wrap-users-member
+	background: $bgParticipant
+	border-right: 2px solid #d2dce4
+
+.wrap-member
+	border-bottom: 1px solid #d2dce4
+	padding: 20px 30px
+	position: relative
+	transition: all .2s ease-in-out
+	&:hover
+		background: darken(#dde6ef,3%)
+	p
+		font-family: 'Raleway', sans-serif
+		padding: 0 20px
+	img, p
+		display: inline-block
+	img
+		position: relative
+		box-shadow: 0 4px 5px rgba(0,0,0,0.05)
+
+.avatar-github
+	width: 50px
+	border-radius: 50%
