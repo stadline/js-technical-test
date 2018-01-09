@@ -17,6 +17,7 @@ $ (function (){
 
 		// stocks tt la conversation en objets
 		const myUsers = [];
+		
 		//Appel ajax Admin
 		ajaxGet( `https://api.github.com/repos/${myUrl}`, function( data ) {
 			const profil 			= $.parseJSON(data);
@@ -37,6 +38,7 @@ $ (function (){
 		});
 
 
+		//Appel ajax Autre User
 		ajaxGet( `https://api.github.com/repos/${myUrl}/comments`, function( data ) {
 			const profilComments = $.parseJSON(data);
 			const ownerIssues = $('.wrap-user-comment').first().data('user');
@@ -57,10 +59,30 @@ $ (function (){
 				}
 				myUsers.push(userId);
 			}
+
+			// créer tout les commentaires
+			for ( user in myUsers) {
+				$('#infos')
+					.last()
+					.append(`<div class="wrap-comment" data-user=${myUsers[user].userName} data-words=${myUsers[user].words}></div>`);
+				$('.wrap-comment')
+					.last()
+					.append(`<img class="avatar-github" src=${myUsers[user].avatar} />`)
+					.append(`<p>${myUsers[user].comment}</p>`);
+
+				if ( myUsers[user].admin === true ) {
+					$('.wrap-comment').eq(user).addClass('wrap-user-comment');
+				}
+			}
+
+			// supprime le premier commentaire et clean les class dans le DOM
+			$('#infos .wrap-user-comment').first().remove();
+			$('.wrap-user-comment').removeClass('wrap-comment');
+
 		});
 
 		console.log(myUsers);
 
-
+		$('#url-github').val('');
 	});
 });
