@@ -17,7 +17,7 @@ $ (function (){
 
 		// stocks tt la conversation en objets
 		const myUsers = [];
-		
+
 		//Appel ajax Admin
 		ajaxGet( `https://api.github.com/repos/${myUrl}`, function( data ) {
 			const profil 			= $.parseJSON(data);
@@ -79,9 +79,22 @@ $ (function (){
 			$('#infos .wrap-user-comment').first().remove();
 			$('.wrap-user-comment').removeClass('wrap-comment');
 
+			// stock tt les participants de la conversation
+			const participantsAvatar = [],
+					participantsUserName = [];
+			
+			for ( tab in myUsers ) {
+				const tableau = [];
+				let 	avatar = myUsers[tab].avatar,
+						userName = myUsers[tab].userName;
+
+				participantsAvatar.push(avatar);
+				participantsUserName.push(userName);
+			}
+			console.log(participantsAvatar, participantsUserName);
+
 		});
 
-		console.log(myUsers);
 
 		$('#url-github').val('');
 	});
