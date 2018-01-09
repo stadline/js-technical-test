@@ -9,6 +9,19 @@ $ (function (){
 		}
 	}
 
+	// fonction qui clean les tableau des participants
+	cleanArray = (array) => {
+		var i, j, len = array.length,
+		out = [], obj = {};
+			for ( i = 0; i < len; i++ ) {
+				obj[array[i]] = 0;
+			}
+			for ( j in obj ) {
+				out.push(j);
+			}
+		return out;
+	}
+
 	$('#btn-url-github').on('click', function(e) {
 		e.preventDefault();
 		const getUrl 		= $('#url-github').val(),
@@ -93,6 +106,11 @@ $ (function (){
 			}
 			console.log(participantsAvatar, participantsUserName);
 
+			// Enleve les doublons du tableau des participant
+			const cleanParticipantAvatar = cleanArray(participantsAvatar);
+			const cleanParticipantUserName = cleanArray(participantsUserName);
+
+			console.log(cleanParticipantAvatar, cleanParticipantUserName);
 		});
 
 
