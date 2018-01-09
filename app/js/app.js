@@ -138,7 +138,28 @@ $ (function (){
 		const sameHeight = $('.js-size').outerHeight(true);
 		$('.wrap-users-member').outerHeight(sameHeight);
 
-		
+		// chaque mots des utilisateur stocké dans un array
+		const words = [];
+			$.each(cleanParticipantUserName, function (index, value) {
+				const idWord = [];
+				let name = $(`#infos div[data-user="${cleanParticipantUserName[index]}"]`);
+			  	$.each(name, function (index, value) {
+				  	let wordName = name.eq(index).attr(`data-words`);
+		  			parseInt(wordName);
+				  	idWord.push(wordName);
+				});
+			words.push(idWord);
+		});
+
+		// addictionner les mots des utilisateurs les stocker et les mettre dans le plugins
+		const dataWords = [];
+		for ( let i = 0; i < words.length; i++ ) {
+			let res = words[i];
+			res = parseInt(res) + parseInt(res); 
+			dataWords.push(res);
+		}
+		console.log(dataWords);
+
 		
 		// insertion etconfig du piechart
 		var ctx = document.getElementById('myChart').getContext('2d');
@@ -151,7 +172,7 @@ $ (function (){
 			        datasets: [{
 			            label: "My First dataset",
 			            backgroundColor: '#0def87',
-			            data: [50, 50, 50],
+			            data: dataWords,
 			        }]
 			    },
 			    // Configuration options go here
