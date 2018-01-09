@@ -151,7 +151,7 @@ $ (function (){
 			words.push(idWord);
 		});
 
-		// addictionner les mots des utilisateurs les stocker et les mettre dans le plugins
+		// additionner les mots des utilisateurs les stocker et les mettre dans le plugins
 		const dataWords = [];
 		for ( let i = 0; i < words.length; i++ ) {
 			let res = words[i];
