@@ -17,7 +17,7 @@ $ (function (){
 
 		// stocks tt la conversation en objets
 		const myUsers = [];
-		//Appel ajax
+		//Appel ajax Admin
 		ajaxGet( `https://api.github.com/repos/${myUrl}`, function( data ) {
 			const profil 			= $.parseJSON(data);
 			let 	avatarUser 		= profil.user.avatar_url,
@@ -35,6 +35,32 @@ $ (function (){
 			const userOwner = new User(avatarUser, commentUser, words, true, userName);
 			myUsers.push(userOwner);
 		});
+
+
+		ajaxGet( `https://api.github.com/repos/${myUrl}/comments`, function( data ) {
+			const profilComments = $.parseJSON(data);
+			const ownerIssues = $('.wrap-user-comment').first().data('user');
+
+			// push chaque objet user dans mon tab myUsers
+			for ( comment in profilComments ) {
+				
+				let 	avatarUser 		= profilComments[comment].user.avatar_url,
+						commentUser 	= profilComments[comment].body,
+						words 			= profilComments[comment].body.length,
+						userName			= profilComments[comment].user.login,
+						userId 			= `user${comment}`;
+				
+				if ( userName === ownerIssues ) {
+					userId = new User(avatarUser, commentUser, words, true, userName);
+				} else {
+					userId = new User(avatarUser, commentUser, words, false, userName);
+				}
+				myUsers.push(userId);
+			}
+		});
+
 		console.log(myUsers);
+
+
 	});
 });
