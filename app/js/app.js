@@ -115,8 +115,6 @@ $ (function (){
 			// Enleve les doublons du tableau des participant
 			const cleanParticipantAvatar = cleanArray(participantsAvatar);
 			const cleanParticipantUserName = cleanArray(participantsUserName);
-
-			console.log(cleanParticipantAvatar, cleanParticipantUserName);
 		
 			// affiches tout les membres
 			for ( member in cleanParticipantAvatar ) {
@@ -139,7 +137,27 @@ $ (function (){
 		// mettre la taille de la partie membre à la meme taille que conversation
 		const sameHeight = $('.js-size').outerHeight(true);
 		$('.wrap-users-member').outerHeight(sameHeight);
-		console.log(sameHeight);
+
+		
+		
+		// insertion etconfig du piechart
+		var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			    // The type of chart we want to create
+			    type: 'pie',
+			    // The data for our dataset
+			    data: {
+			        labels: cleanParticipantUserName,
+			        datasets: [{
+			            label: "My First dataset",
+			            backgroundColor: '#0def87',
+			            data: [50, 50, 50],
+			        }]
+			    },
+			    // Configuration options go here
+			    options: {}
+			});
+
 		});
 		$('#url-github').val('');
 	});
