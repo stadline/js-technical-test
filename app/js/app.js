@@ -1,5 +1,5 @@
 $ (function (){
-	
+
 	class User {
 		constructor(avatar, comment, words, admin, userName) {
 			this.avatar = avatar,
@@ -136,9 +136,20 @@ $ (function (){
 					.append(`<input type="checkbox"/>`);
 			}
 
+		// mettre la taille de la partie membre à la meme taille que conversation
+		const sameHeight = $('.js-size').outerHeight(true);
+		$('.wrap-users-member').outerHeight(sameHeight);
+		console.log(sameHeight);
 		});
-
-
 		$('#url-github').val('');
 	});
+
+	$(document).on('click', '.wrap-member', function(){
+		const checked = $(this).attr('data-user');
+		$(this).find('input').prop("checked");
+		$(this).toggleClass('wrap-member-hide')
+		const hideThis = $('#infos').find(`[data-user=${checked}]`);
+		hideThis.toggle();
+	});
+
 });

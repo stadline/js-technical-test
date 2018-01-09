@@ -107,6 +107,33 @@
 	img
 		position: relative
 		box-shadow: 0 4px 5px rgba(0,0,0,0.05)
+	&:before
+		content: ""
+		height: 10px
+		width: 10px
+		display: block
+		position: absolute
+		background: #0def87
+		border-radius: 50%
+		bottom: 20px
+		left: 65px
+		z-index: 1
+		transition: all .2s ease-in-out
+	input[type="checkbox"]
+		display: none
+
+.wrap-member-hide
+	background: #dde6ef
+	position: relative
+	&:before
+		content: ""
+		height: 10px
+		width: 10px
+		display: block
+		position: absolute
+		background: #ff4a03
+		border-radius: 50%
+		z-index: 1
 
 .avatar-github
 	width: 50px
