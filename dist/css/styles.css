@@ -104,6 +104,8 @@
 .wrap-users-member {
   background: #f9fafb;
   border-right: 2px solid #d2dce4; }
+  .wrap-users-member h3 {
+    font-family: "Raleway", sans-serif; }
 
 .wrap-member {
   border-bottom: 1px solid #d2dce4;

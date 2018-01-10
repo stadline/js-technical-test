@@ -30,15 +30,17 @@ $ (function (){
 		return out;
 	}
 
+	$('.js-size').hide();
 	$('#btn-url-github').on('click', function(e) {
 		e.preventDefault();
+		$('#member, #infos').children().remove();
+		$('.search h3').remove();
 		const getUrl 		= $('#url-github').val(),
 				splitGetUrl = getUrl.split('https://github.com/'),
 				myUrl 		= splitGetUrl[1];
-
+		$('.js-size').show();
 		// stocks tt la conversation en objets
 		const myUsers = [];
-
 		//Appel ajax Admin
 		ajaxGet( `https://api.github.com/repos/${myUrl}`, function( data ) {
 			const profil 			= $.parseJSON(data);
@@ -153,14 +155,16 @@ $ (function (){
 
 		// additionner les mots des utilisateurs les stocker et les mettre dans le plugins
 		const dataWords = [];
-		for ( let i = 0; i < words.length; i++ ) {
-			let res = words[i];
-			res = parseInt(res) + parseInt(res); 
-			dataWords.push(res);
+		for ( loop in words ) {
+			let count = words[loop].length,
+			total = 0;
+			for ( let i = 0; i < words[loop].length; i++ ) {
+				let res = parseInt(words[loop][i]);
+				total += res;
+			}
+			dataWords.push(total);
 		}
-		console.log(dataWords);
 
-		
 		// insertion etconfig du piechart
 		var ctx = document.getElementById('myChart').getContext('2d');
 			var chart = new Chart(ctx, {
@@ -178,7 +182,7 @@ $ (function (){
 			    // Configuration options go here
 			    options: {}
 			});
-
+			console.log(dataWords);
 		});
 		$('#url-github').val('');
 	});
