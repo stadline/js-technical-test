@@ -22,7 +22,38 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+ul {
+  width: 100%;
+  list-style-type: none;
+  padding: 18px;
+  bottom: 32px;
+  flex-direction: column;
+}
+
+li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 50px;
+}
+
+.App-thread-container-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+  vertical-align: center;
+}
+
+.App-thread-container-avatarcontainer {
+  float: left;
+  width: 50px;
+}
+
+.App-thread-container-comment {
+  display: flex;
+  justify-content: center;
+  background-color: green;
+  text-align: left;
+  margin-left: 70px;
 }

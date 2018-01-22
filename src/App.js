@@ -17,7 +17,11 @@ class App extends Component {
   async initIssueInfos(path) {
     const issueInfo = await github.getIssueInfos(path);
     this.setState({
-      title: issueInfo.title + ' #' + issueInfo.number
+      title: issueInfo.title + ' #' + issueInfo.number,
+      author: {
+        login: issueInfo.user.login,
+        id: issueInfo.user.id
+      }
     });
   }
 
@@ -30,7 +34,10 @@ class App extends Component {
     return this.state.comments && this
       .state
       .comments
-      .map(comments => <Comment key={comments.id} value={comments.body}/>);
+      .map(comment => <Comment
+        key={comment.id}
+        comment={comment.body}
+        avatar={comment.user.avatar_url}/>);
   }
 
   render() {
@@ -38,15 +45,15 @@ class App extends Component {
     return (
       <div className="App">
         <Header value={this.state.title}/>
-        <div>
-          {this.renderComments()}
+
+        <div className="App-thread">
+          <h2>Conversation with {this.state.author && this.state.author.login}
+          </h2>
+          <ul>
+            {this.renderComments()}
+          </ul>
         </div>
 
-        <p className=" App-intro">
-          To get started, edit
-          <code>src/App.js</code>
-          and save to reload.
-        </p>
       </div>
     );
   }
@@ -66,7 +73,19 @@ class Header extends Component {
 class Comment extends Component {
   render() {
     return (
-      <p >{this.props.value}</p>
-    );
+      <li className="App-thread-container">
+        <div className="App-thread-container-avatarcontainer">
+          <img
+            src={this.props.avatar}
+            alt='avatar'
+            className="App-thread-container-avatar"/>
+        </div>
+        <div className="App-thread-container-comment">
+          <p >
+            {this.props.comment}
+          </p>
+        </div>
+      </li>
+    )
   }
 }
