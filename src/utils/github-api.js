@@ -1,8 +1,16 @@
 const BASE_URL = 'https://api.github.com'
 
-export const getIssueInfos = async(path) => {
+const getIssueInfos = async(path) => {
     const url = `${BASE_URL}/repos${path}`;
+    return await xhr(url);
+}
 
+const getComments = async(path) => {
+    const url = `${BASE_URL}/repos${path}/comments`;
+    return await xhr(url);
+}
+
+const xhr = async(url) => {
     try {
         const response = await fetch(url, {method: 'get'});
         if (response.status !== 200) {
@@ -10,11 +18,11 @@ export const getIssueInfos = async(path) => {
         }
 
         const data = await response.json();
-
         return data;
 
     } catch (error) {
         console.error(error);
     }
-
 }
+
+export {getIssueInfos, getComments}
