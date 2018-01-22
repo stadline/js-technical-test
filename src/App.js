@@ -44,10 +44,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header value={this.state.title}/>
+        <Header className="App-header" value={this.state.title}/>
 
         <div className="App-thread">
-          <h2>Conversation with {this.state.author && this.state.author.login}
+          <h2 className>Conversation with {this.state.author && this.state.author.login}
           </h2>
           <ul>
             {this.renderComments()}

@@ -23,7 +23,6 @@
 }
 
 ul {
-  width: 100%;
   list-style-type: none;
   padding: 18px;
   bottom: 32px;
@@ -51,9 +50,23 @@ li {
 }
 
 .App-thread-container-comment {
-  display: flex;
   justify-content: center;
-  background-color: green;
+  background-color: #f3fdff;
   text-align: left;
   margin-left: 70px;
+  color: #9eaab6;
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+}
+
+.App-thread {
+  background-color: #eef3f6;
+}
+
+h2 {
+  color: #9eaab6;
+}
+
+.App-header {
+  height: 30px;
 }
