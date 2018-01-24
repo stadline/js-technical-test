@@ -1,25 +1,25 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  height: 20%;
+  color: #f3fdff;
 }
 
-.App-title {
-  font-size: 1.5em;
+.App-thread {
+  background-color: #eef3f6;
 }
 
-.App-intro {
-  font-size: large;
+h1 {
+  padding: 2%;
+  font-size: 1.3em;
+}
+
+h2 {
+  color: #9eaab6;
+  font-size: 1em;
+  padding: 2%;
+  top: 15%;
+  position: relative;
+  margin: 0;
 }
 
 ul {
@@ -27,6 +27,7 @@ ul {
   padding: 18px;
   bottom: 32px;
   flex-direction: column;
+  margin: 0 2% 0 2%;
 }
 
 li {
@@ -35,7 +36,7 @@ li {
   min-height: 50px;
 }
 
-.App-thread-container-avatar {
+.App-thread-container-avatar.left {
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -49,8 +50,7 @@ li {
   width: 50px;
 }
 
-.App-thread-container-comment {
-  justify-content: center;
+.App-thread-container-comment.left {
   background-color: #f3fdff;
   text-align: left;
   margin-left: 70px;
@@ -59,14 +59,26 @@ li {
   padding: 5px 15px 5px 15px;
 }
 
-.App-thread {
-  background-color: #eef3f6;
+.App-thread-container-avatarcontainer.right {
+  float: right;
+  width: 50px;
 }
 
-h2 {
+.App-thread-container-avatar.right {
+  margin-left: 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  float: left;
+  vertical-align: center;
+}
+
+.App-thread-container-comment.right {
+  text-align: left;
+  word-wrap: break-word;
+  margin-right: 70px;
+  background-color: #f3fdff;
   color: #9eaab6;
-}
-
-.App-header {
-  height: 30px;
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
 }
