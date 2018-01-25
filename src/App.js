@@ -12,29 +12,7 @@ class App extends Component {
   async fetchIssue(path) {
     const issueInfo = await github.getIssueInfos(path);
     const comments = await github.getComments(path);
-
-    // Object qui stock l'état de filtre des utilisateurs
-    const filteredUsers = comments
-      .map(comment => comment.user)
-      .reduce((acc, user) => {
-        if (!acc.hasOwnProperty(user.id)) {
-          acc[user.id] = {
-            filtered: false,
-            avatar: user.avatar_url
-          };
-        }
-        return acc;
-      }, {});
-
-    this.setState({
-      title: issueInfo.title + ' #' + issueInfo.number,
-      author: {
-        login: issueInfo.user.login,
-        id: issueInfo.user.id
-      },
-      comments: comments,
-      filteredUsers: filteredUsers
-    });
+    this.setState({comments: comments, issueInfo: issueInfo});
   }
 
   render() {
@@ -49,35 +27,76 @@ class App extends Component {
 export default App;
 
 class Github extends Component {
-  // constructor(props){   super(props);   this.state }
+  constructor(props) {
+    super(props);
+
+    const issueInfo = this.props.issue.issueInfo;
+    const comments = this.props.issue.comments;
+
+    // Object qui stock l'état de filtre des utilisateurs
+    const filteredUsers = comments
+      .map(comment => comment.user)
+      .reduce((acc, user) => {
+        if (!acc.hasOwnProperty(user.id)) {
+          acc[user.id] = {
+            filtered: false,
+            avatar: user.avatar_url
+          };
+        }
+        return acc;
+      }, {});
+
+    this.state = {
+      title: issueInfo.title + ' #' + issueInfo.number,
+      author: {
+        login: issueInfo.user.login,
+        id: issueInfo.user.id
+      },
+      comments: comments,
+      filteredUsers: filteredUsers
+    };
+  }
+
+  handleFilterUserChange(userId) {
+    const newState = Object.assign({}, this.state);
+    newState.filteredUsers[userId].filtered = !this.state.filteredUsers[userId].filtered;
+    this.setState(newState);
+  }
 
   renderComments() {
     return this
-      .props
-      .issue
+      .state
       .comments
-      .map(comment => <Comment
-        key={comment.id}
-        comment={comment.body}
-        avatar={comment.user.avatar_url}
-        isAuthor={comment.user.id === this.props.issue.author.id}/>);
+      .map(comment => {
+        if (this.state.filteredUsers[comment.user.id].filtered) {
+          return ' ';
+        }
+        return <Comment
+          key={comment.id}
+          comment={comment.body}
+          avatar={comment.user.avatar_url}
+          isAuthor={comment.user.id === this.state.author.id}/>
+      });
   }
 
   render() {
     return (
       <div className="App">
-        <Header className="App-header" value={this.props.issue.title}/>
+        <Header className="App-header" value={this.state.title}/>
 
         <div className="App-info">
           <Chart className="App-info-chart"/>
           <FilterUser
             className="App-info-filter"
-            filteredUsers={this.props.issue.filteredUsers}/>
+            filteredUsers={this.state.filteredUsers}
+            onFilterChange={this
+            .handleFilterUserChange
+            .bind(this)}/>
         </div>
 
         <div className="App-thread">
           <h2>
-            Conversation with {this.props.issue.author.login}
+            Conversation with {this.state.author.login}
           </h2>
           <ul>
             {this.renderComments()}
@@ -98,15 +117,28 @@ class Chart extends Component {
 }
 
 class FilterUser extends Component {
+
+  handleFilterChange(userId) {
+    this
+      .props
+      .onFilterChange(userId);
+  }
+
   render() {
     const users = [];
     for (let userId in this.props.filteredUsers) {
       const user = this.props.filteredUsers[userId];
+      const filteredClass = user.filtered
+        ? ' filtered'
+        : ' '
       users.push(<img
         key={userId}
         src={user.avatar}
         alt='avatar'
-        className='App-info-filter-user avatar'/>);
+        className={'App-info-filter-user avatar' + filteredClass}
+        onClick={this
+        .handleFilterChange
+        .bind(this, userId)}/>);
     }
 
     return (users);

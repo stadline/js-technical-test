@@ -100,3 +100,7 @@ li {
 .App-info-filter-user {
   margin: 2%;
 }
+
+.filtered {
+  opacity: 0.2;
+}
