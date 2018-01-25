@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import * as github from './utils/github-api.js'
+import chartjs from 'react-chartjs'
 
 class App extends Component {
 
@@ -40,7 +41,8 @@ class Github extends Component {
         if (!acc.hasOwnProperty(user.id)) {
           acc[user.id] = {
             filtered: false,
-            avatar: user.avatar_url
+            avatar: user.avatar_url,
+            login: user.login
           };
         }
         return acc;
@@ -85,7 +87,10 @@ class Github extends Component {
         <Header className="App-header" value={this.state.title}/>
 
         <div className="App-info">
-          <Chart className="App-info-chart"/>
+          <PieChart
+            className="App-info-chart"
+            comments={this.state.comments}
+            users={this.state.filteredUsers}/>
           <FilterUser
             className="App-info-filter"
             filteredUsers={this.state.filteredUsers}
@@ -108,10 +113,37 @@ class Github extends Component {
   }
 }
 
-class Chart extends Component {
+class PieChart extends Component {
   render() {
+    const PieChart = chartjs.Pie;
+
+    const datachart = [];
+
+    for (let userId in this.props.users) {
+      const user = this.props.users[userId];
+      if (user.filtered) {
+        continue;
+      }
+
+      const rate = this
+        .props
+        .comments
+        .filter(comment => comment.user.id == userId)
+        .reduce((numberWord, comment) => {
+          return comment
+            .body
+            .split(' ')
+            .length + numberWord
+        }, 0);
+
+      datachart.push({value: rate, label: user.login});
+    }
+
     return (
-      <p>chart</p>
+      <div>
+        <h2>Qui est le plus bavard ?</h2>
+        <PieChart data={datachart} id="canvas"></PieChart>
+      </div>
     );
   }
 }
