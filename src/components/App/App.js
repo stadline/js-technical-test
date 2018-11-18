@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { fetchGitHubIssue } from '../../api'
-import PieChart from "react-svg-piechart"
+import PieChart from 'react-svg-piechart'
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import Comment from '../Comment/Comment'
 import './App.scss'
 
@@ -34,6 +35,7 @@ class App extends Component {
         participants: participants.map((participant) => ({
           ...participant,
           visible: true,
+          color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
         })),
       })
       
@@ -88,7 +90,7 @@ class App extends Component {
       {
         title: part.login,
         value: part.words,
-        color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+        color: part.color,
       }
     ]), [])
     return (
@@ -106,8 +108,12 @@ class App extends Component {
                       tag="a"
                       href="#"
                       onClick={() => {this.toggleParticipant(participant.id)}}
+                      style={{color: participant.color, fontWeight: 'bold'}}
                     >
-                      {participant.login}
+                      <div className="participant-list-item">
+                        <span>{participant.login}</span>
+                        <span>{participant.visible ? <FaRegEye size={20} /> : <FaRegEyeSlash size={20} />}</span>
+                      </div>
                     </ListGroupItem>
                   )
                 })}

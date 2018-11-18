@@ -7,6 +7,13 @@
     PieChart {
       margin-top: 25px;
     }
+    .participant-list-item {
+      display: flex;
+      align-items: center;
+      span:first-child {
+        flex: 1;
+      }
+    }
   }
   .thread-container {
   }  

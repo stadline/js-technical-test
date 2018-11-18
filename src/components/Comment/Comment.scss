@@ -2,6 +2,10 @@
   display: flex;
   &:nth-child(2n) {
     flex-direction: row-reverse;
+    .comment-author-avatar {
+      margin-right: 0;
+      margin-left: 15px;
+    }
   }
   .comment-author-avatar {
     width:100px;
@@ -9,7 +13,7 @@
     overflow: hidden;
     border-radius:50%;
     position: relative;
-    margin: 15px 15px 15px 0;
+    margin-right: 15px;
     img {
       position: absolute;
       top:50%;
@@ -19,6 +23,9 @@
   }
   .comment-body {
     flex: 1;
-    padding-top: 15px;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-bottom: 25px;
   }
 }
