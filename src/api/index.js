@@ -1,6 +1,6 @@
 import axios from 'axios'
 import config from '../config'
-import { countGitHubCommentWords } from '../lib/helpers'
+import { countGitHubCommentWords, replaceCodeBlocks } from '../lib/helpers'
 
 const api = axios.create({
   baseURL: config.API_BASE_URL,
@@ -57,9 +57,13 @@ const fetchGitHubIssue = async (repos, owner, issueId) => {
     return {
       issue: {
         ...issue,
+        body: replaceCodeBlocks(issue.body)
       },
       comments: [
-        ...rawComments,
+        ...rawComments.map(c => ({
+          ...c,
+          body: replaceCodeBlocks(c.body)
+        })),
       ],
       participants,
     }

@@ -10,9 +10,7 @@ const Comment = ({ user, isAuthor, ...props }) => {
       <div className="comment-author-avatar">
         <img width="100" height="100" src={user.avatar_url} alt={user.login} />
       </div>
-      <div className="comment-body">
-        {props.children}
-      </div>
+      <div className="comment-body" dangerouslySetInnerHTML={{ __html: props.children }}></div>
     </div> 
   )
 }

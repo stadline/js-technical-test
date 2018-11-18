@@ -11,7 +11,6 @@ import './Issue.scss'
 class Issue extends Component {
   
   constructor(props) {
-    console.log(props)
     super(props)
     this.toggleParticipant = this.toggleParticipant.bind(this);
     this.state = {
@@ -114,7 +113,7 @@ class Issue extends Component {
                       style={{color: participant.color, fontWeight: 'bold'}}
                     >
                       <div className="participant-list-item">
-                        <span>{participant.login}</span>
+                        <span>{participant.login} ({participant.words})</span>
                         <span>{participant.visible ? <FaRegEye size={20} /> : <FaRegEyeSlash size={20} />}</span>
                       </div>
                     </ListGroupItem>
@@ -123,16 +122,7 @@ class Issue extends Component {
               </ListGroup>
               <PieChart
                 data={data}
-                // If you need expand on hover (or touch) effect
                 expandOnHover
-                // If you need custom behavior when sector is hovered (or touched)
-                onSectorHover={(d, i, e) => {
-                  if (d) {
-                    console.log("Mouse enter - Index:", i, "Data:", d, "Event:", e)
-                  } else {
-                    console.log("Mouse leave - Index:", i, "Event:", e)
-                  }
-                }}
               />
             </Col>
             <Col sm="12" xl={{ size: 7 }} className="thread-container">

@@ -1,3 +1,9 @@
+export const replaceCodeBlocks = (text) => {
+  return text
+    .replace(/^(([ \t]*`{3,4})([^\n]*)([\s\S]+?)(^[ \t]*\2))/gm, '<pre><code>$4</pre></code>')
+    .replace(/`\s?([^`].*?)\s?`/gm, '<code>$1</code>')
+}
+
 export const countGitHubCommentWords = (comment) => {
   comment = comment.toLowerCase()
                     // Remove block code

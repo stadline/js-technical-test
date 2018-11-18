@@ -7,25 +7,26 @@
       margin-left: 15px;
     }
   }
-  .comment-author-avatar {
-    width:100px;
-    height:100px;
-    overflow: hidden;
-    border-radius:50%;
-    position: relative;
-    margin-right: 15px;
-    img {
-      position: absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%,-50%)
+  &.hl {
+    .comment-body {
+      background: #d2f8d2;
     }
   }
+  .comment-author-avatar {
+    position: relative;
+    margin-right: 15px;
+    margin-bottom: 25px;
+  }
   .comment-body {
-    flex: 1;
     padding: 0.75rem 1.25rem;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
     margin-bottom: 25px;
+    word-wrap: break-word;
+    white-space: pre-line;
+    min-width: 0;
+    pre {
+      background: #e9ecef;
+    }
   }
 }
