@@ -1,0 +1,24 @@
+.comment-container {
+  display: flex;
+  &:nth-child(2n) {
+    flex-direction: row-reverse;
+  }
+  .comment-author-avatar {
+    width:100px;
+    height:100px;
+    overflow: hidden;
+    border-radius:50%;
+    position: relative;
+    margin: 15px 15px 15px 0;
+    img {
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%)
+    }
+  }
+  .comment-body {
+    flex: 1;
+    padding-top: 15px;
+  }
+}

@@ -1,9 +1,13 @@
 .app-container {
-  background: red;
+  margin: 50px 0;
+  .loading {
+    text-align: center;
+  }
   .participant-container {
-    background: green;
+    PieChart {
+      margin-top: 25px;
+    }
   }
   .thread-container {
-    background: pink;
   }  
 }

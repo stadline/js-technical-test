@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { fetchGitHubIssue } from '../../api'
+import PieChart from "react-svg-piechart"
+import Comment from '../Comment/Comment'
 import './App.scss'
 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col,  ListGroup, ListGroupItem } from 'reactstrap';
 
 class App extends Component {
   
   constructor(props) {
     super(props)
+    this.toggleParticipant = this.toggleParticipant.bind(this);
     this.state = {
       loading: false,
       issue: null,
       comments: [],
+      filteredComments: [],
       participants: [],
       error: null,
     }
@@ -21,12 +25,16 @@ class App extends Component {
     this.setState({ loading: true })
     try {
       const response = await fetchGitHubIssue('nodejs', 'node', 6867)
-      const { issue , comments, participants } = response
+      const { issue, comments, participants } = response
       this.setState({
         loading: false,
         issue,
         comments,
-        participants,
+        filteredComments: comments,
+        participants: participants.map((participant) => ({
+          ...participant,
+          visible: true,
+        })),
       })
       
     } catch (e) {
@@ -39,18 +47,101 @@ class App extends Component {
       loading: false,
       issue: null,
       comments: [],
+      filteredComments: [],
       participants: [],
       error: error,
     })
   }
 
+  toggleParticipant(participantId) {
+    const { comments, participants: oldParticipants } = this.state
+    const index = oldParticipants.findIndex((p) => p.id === participantId)
+    const participants = [ 
+      ...oldParticipants.slice(0, index),
+      {
+        ...oldParticipants[index],
+        visible: !oldParticipants[index].visible,
+      },
+      ...oldParticipants.slice(index + 1)
+    ]
+
+    if (index === -1) {
+      return false
+    }
+
+    this.setState({
+      ...this.state,
+      filteredComments: [
+        ...comments.filter((comment) => {
+          const participant = participants.filter((p) => p.id === comment.user.id)[0]
+          return participant.visible
+        })
+      ],
+      participants
+    })
+  }
+
   render() {
+    const { loading, issue, filteredComments, participants } = this.state
+    const data = participants.filter((p) => p.visible).reduce((acc, part) => ([
+      ...acc,
+      {
+        title: part.login,
+        value: part.words,
+        color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+      }
+    ]), [])
     return (
       <Container className="app-container">
-        <Row>
-          <Col sm="12" xl={{ size: 3, offset: 1 }} className="participant-container"></Col>
-          <Col sm="12" xl={{ size: 7 }} className="thread-container"></Col>
-        </Row>
+        {loading ? (
+          <div className="loading">loading...</div>
+        ) : (
+          <Row>
+            <Col sm="12" xl={{ size: 3, offset: 1 }} className="participant-container">
+              <ListGroup>
+                {participants.map((participant) => {
+                  return (
+                    <ListGroupItem
+                      key={`participant-${participant.id}`}
+                      tag="a"
+                      href="#"
+                      onClick={() => {this.toggleParticipant(participant.id)}}
+                    >
+                      {participant.login}
+                    </ListGroupItem>
+                  )
+                })}
+              </ListGroup>
+              <PieChart
+                data={data}
+                // If you need expand on hover (or touch) effect
+                expandOnHover
+                // If you need custom behavior when sector is hovered (or touched)
+                onSectorHover={(d, i, e) => {
+                  if (d) {
+                    console.log("Mouse enter - Index:", i, "Data:", d, "Event:", e)
+                  } else {
+                    console.log("Mouse leave - Index:", i, "Event:", e)
+                  }
+                }}
+              />
+            </Col>
+            <Col sm="12" xl={{ size: 7 }} className="thread-container">
+              {issue && (
+                <Comment key={`issue-${issue.id}`} user={issue.user} isAuthor={true}>
+                  {issue.body}
+                </Comment>  
+              )}
+              {filteredComments.map((comment) => {
+                return (
+                  <Comment key={`comment-${comment.id}`} user={comment.user} isAuthor={comment.user.id === issue.user.id}>
+                    {comment.body}
+                  </Comment>
+                )
+              })}
+            </Col>
+          </Row>
+        )}
       </Container>
     );
   }

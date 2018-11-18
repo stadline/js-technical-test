@@ -7998,6 +7998,11 @@ react-popper@^0.10.4:
     popper.js "^1.14.1"
     prop-types "^15.6.1"
 
+react-svg-piechart@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-svg-piechart/-/react-svg-piechart-2.1.1.tgz#b46b34f9cd528de97ab84665b7af27b5ac7f65b4"
+  integrity sha512-D89/4QV0BhSX1uxL1FYgbSeIllsfY8bnqzsEVHUMmoJS/sRP8mfVo9mztFuE7JxKQLcHxRl82gSCIP+siYQfNg==
+
 react-transition-group@^2.3.1:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.0.tgz#70bca0e3546102c4dc5cf3f5f57f73447cce6874"
