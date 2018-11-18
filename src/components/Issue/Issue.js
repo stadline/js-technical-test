@@ -125,19 +125,25 @@ class Issue extends Component {
                 expandOnHover
               />
             </Col>
-            <Col sm="12" xl={{ size: 7 }} className="thread-container">
-              {issue && (
-                <Comment key={`issue-${issue.id}`} user={issue.user} isAuthor={true}>
-                  {issue.body}
-                </Comment>  
-              )}
-              {filteredComments.map((comment) => {
-                return (
-                  <Comment key={`comment-${comment.id}`} user={comment.user} isAuthor={comment.user.id === issue.user.id}>
-                    {comment.body}
-                  </Comment>
-                )
-              })}
+            <Col sm="12" xl={{ size: 7 }} >
+              <Row>
+                <Col>
+                  {issue && (
+                    <h1>{issue.title}</h1>  
+                  )}
+                </Col>
+              </Row>
+              <Row>
+                <Col className="thread-container">
+                  {filteredComments.map((comment) => {
+                    return (
+                      <Comment key={`comment-${comment.id}`} user={comment.user} isAuthor={comment.user.id === issue.user.id}>
+                        {comment.body}
+                      </Comment>
+                    )
+                  })}
+                </Col>
+              </Row>
             </Col>
           </Row>
         )}

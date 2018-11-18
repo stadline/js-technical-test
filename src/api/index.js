@@ -60,6 +60,10 @@ const fetchGitHubIssue = async (repos, owner, issueId) => {
         body: replaceCodeBlocks(issue.body)
       },
       comments: [
+        {
+          ...issue,
+          body: replaceCodeBlocks(issue.body)
+        },
         ...rawComments.map(c => ({
           ...c,
           body: replaceCodeBlocks(c.body)

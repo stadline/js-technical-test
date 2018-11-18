@@ -1,6 +1,6 @@
 import React from "react"
 import Issue from '../Issue/Issue'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 const App = ({ color, ...props }) => (
   <Router>
