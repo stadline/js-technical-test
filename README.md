@@ -50,7 +50,7 @@ Le principe : classer les participants en fonction du nombre de mots écrits. Vo
 
 Filtrer un participant le fait disparaître du graphique.
 
-### Champs "nouveau message"
+### Champ "nouveau message"
 
 Ajouter un textarea sous la discussion pour permettre d'ajouter un commentaire. Il faudra faire un appel authentifié à l'API Github. Vous pouvez stocker les infos de connexion dans une configuration (pas besoin de formulaire de login).
 
